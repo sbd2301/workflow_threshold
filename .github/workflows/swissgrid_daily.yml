@@ -1,4 +1,4 @@
-name: SwissGrid AE-Preis Daily Report
+yname: SwissGrid AE-Preis Daily Report
 
 on:
   schedule:
@@ -24,7 +24,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install requests pandas matplotlib resend
+        run: pip install requests pandas matplotlib resend openpyxl
 
       - name: Download data, plot, and send e-mail
         run: python scripts/daily_report.py
