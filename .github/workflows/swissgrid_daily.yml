@@ -1,0 +1,30 @@
+name: SwissGrid AE-Preis Daily Report
+
+on:
+  schedule:
+    - cron: "0 7 * * *"   # every day at 07:00 UTC
+  workflow_dispatch:        # allow manual runs
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      MAIL_FROM:      ${{ secrets.MAIL_FROM }}
+      MAIL_TO:        ${{ secrets.MAIL_TO }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests pandas matplotlib resend
+
+      - name: Download data, plot, and send e-mail
+        run: python scripts/daily_report.py
