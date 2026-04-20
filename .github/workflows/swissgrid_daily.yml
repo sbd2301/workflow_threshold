@@ -24,7 +24,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install requests pandas matplotlib resend openpyxl
+        run: pip install requests pandas matplotlib resend
 
       - name: Download data, plot, and send e-mail
         run: python scripts/daily_report.py
